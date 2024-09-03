@@ -26,42 +26,42 @@ Step 1: Create your custom neural network.
       net.push_back(std::make_unique<denseLayer>(DIMENSION_1, DIMENSION_2));
   ```
 
-  Creates a dense layer that completely connects "DIMENSION_1" neurons in a layer with other "DIMENSION_2" neurons in another layer.
+  Creates a dense layer that completely connects DIMENSION_1 neurons in a layer with other DIMENSION_2 neurons in another layer.
 
 - Inserting a convolutional layer:
   ```cpp
       net.push_back(std::make_unique<convolutionLayer>(HEIGHT, WIDTH, K, MAPS));
   ```
 
-  Creates a convolutional layer that connects a layer of neurons that represents a "HEIGHT" x "WIDTH" image and constructs the following layer, that represents the activation for each "K" x "K" continuous submatrix, along "MAPS" feature maps (each feature map detects a different kind of shape). There are ("HEIGHT" - "K" + 1) x ("WIDTH" - "K" + 1) neurons in the following layer.
+  Creates a convolutional layer that connects a layer of neurons that represents a HEIGHT x WIDTH image and constructs the following layer, that represents the activation for each K x K continuous submatrix, along MAPS feature maps (each feature map detects a different kind of shape). There are (HEIGHT - K + 1) x (WIDTH - K + 1) neurons in the following layer.
 
 - Inserting a pooling layer:
   ```cpp
       net.push_back(std::make_unique<poolingLayer>(HEIGHT, WIDTH, K, MAPS));
   ```
 
-  Creates a pooling layer that connects a layer of neurons that represents a "HEIGHT" x "WIDTH" image and constructs the following layer, that represents a ("HEIGHT" / "K") x ("WIDTH" / "K") compressed image (Attention: "HEIGHT" and "WIDTH" must be divisible by "K") along "MAPS" feature maps. Pooling layers are usually used after a convolutional Layer. (Attention: the "MAPS" value must be constant between corresponding convolutional and pooling layers).
+  Creates a pooling layer that connects a layer of neurons that represents a HEIGHT x WIDTH image and constructs the following layer, that represents a (HEIGHT / K) x (WIDTH / K) compressed image (Attention: HEIGHT and WIDTH must be divisible by K) along MAPS feature maps. Pooling layers are usually used after a convolutional Layer. (Attention: the MAPS value must be constant between corresponding convolutional and pooling layers).
 
 - Inserting a Sigmoid activation layer:
   ```cpp
       net.push_back(std::make_unique<Sigmoid>(DIMENSION));
   ```
 
-  Creates an activation layer for "DIMENSION" neurons.
+  Creates an activation layer for DIMENSION neurons.
 
 - Inserting a ReLU activation layer:
   ```cpp
       net.push_back(std::make_unique<ReLU>(DIMENSION));
   ```
 
-  Creates an activation layer for "DIMENSION" neurons.
+  Creates an activation layer for DIMENSION neurons.
 
 - Inserting a Softmax layer:
   ```cpp
       net.push_back(std::make_unique<Softmax>(DIMENSION));
   ```
 
-  Creates a layer that constructs a probability distribution of the activation of the last layer of neurons (Attention: MUST be used at the end of a neural network because of the loss function; If you want to get rid of this restriction, change the loss function) .
+  Creates a layer that constructs a probability distribution of the activation of the last layer of neurons (Attention: MUST be used at the end of a neural network because of the loss function; If you want to get rid of this restriction, change the loss function).
 
 Step 2: Tune your hyperparameters.
 
@@ -69,13 +69,13 @@ Step 2: Tune your hyperparameters.
   void stochasticGradientDescent(int mode, int cntEpochs, int subsetSize, double eta, double micro, double lambda) {}
 ```
 
-mode = 0: Creates a validation data array, equal in length with the testing data array. Used for choosing the hyperparameters.
-mode = 1: Training and testing the AI.
-cntEpochs: The number of epochs in which the model is trained.
-subsetSize: The dimension of the minibatches used in training.
-eta: Learning rate of the gradient descent.
-micro: Friction quotient for momentum.
-lambda: The hyperparameter used in L2-regularization.
+- mode = 0: Creates a validation data array, equal in length with the testing data array. Used for choosing the hyperparameters.
+- mode = 1: Training and testing the AI.
+- cntEpochs: The number of epochs in which the model is trained.
+- subsetSize: The dimension of the minibatches used in training.
+- eta: Learning rate of the gradient descent.
+- micro: Friction quotient for momentum.
+- lambda: The hyperparameter used in L2-regularization.
 
 # Information regarding performance
 
