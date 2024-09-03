@@ -14,6 +14,10 @@ The following project contains:
 - Parsing function for reading the training / testing data.
 - A momentum-based stochastic gradient descent optimizer.
 
+I can't post the training data and testing data, but you can find them there: https://github.com/halimb/MNIST-txt
+
+In my program, the training data is in "data.txt" and testing data is in "test.txt".
+
 # How to use?
 
 Step-by-step tutorial:
