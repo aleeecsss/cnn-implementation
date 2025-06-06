@@ -2,13 +2,14 @@
 #define CONVOLUTIONLAYER_H_INCLUDED
 
 class convolutionLayer : public Layer {
-    public:
+    private:
         int n, m, k, maps;
         std::vector<std::vector<std::vector<double>>> weights, updNetWeights, velocityWeights;
         std::vector<double> biases, updNetBiases, velocityBiases;
-
-        convolutionLayer(int _n, int _m, int _k, int _maps) {
-            n = _n, m = _m, k = _k, maps = _maps;
+    public:
+        convolutionLayer(int _n, int _m, int _k, int _maps) : 
+            n(_n), m(_m), k(_k), maps(_maps) {
+            
             sz = n * m;
             nxtSz = maps * (n - k + 1) * (m - k + 1);
 

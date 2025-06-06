@@ -1,13 +1,14 @@
 #ifndef DENSELAYER_H_INCLUDED
 #define DENSELAYER_H_INCLUDED
 
-class denseLayer : public Layer {
-    public:
+class denseLayer : virtual public Layer {
+    protected:
         int n, m;
         std::vector<std::vector<double>> weights, updNetWeights, velocityWeights;
         std::vector<double> biases, updNetBiases, velocityBiases;
-
-        denseLayer(int _n, int _m) {
+    public:
+        denseLayer(int _n, int _m) : 
+            n(_n), m(_m) {
             n = _n, m = _m;
             sz = n;
             nxtSz = m;

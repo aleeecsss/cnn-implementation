@@ -6,7 +6,8 @@ class poolingLayer : public Layer {
         int n, m, p, q, l, maps;
         std::vector<int> argMax;
     public:
-        poolingLayer(int _n, int _m, int _l, int _maps) {
+        poolingLayer(int _n, int _m, int _l, int _maps) :
+            n(_n), m(_m), l(_l), maps(_maps) {
             n = _n, m = _m, l = _l, maps = _maps;
             sz = n * m * maps;
             p = n / l, q = m / l;

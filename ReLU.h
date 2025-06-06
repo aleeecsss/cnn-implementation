@@ -1,7 +1,7 @@
 #ifndef RELU_H_INCLUDED
 #define RELU_H_INCLUDED
 
-class ReLU : public Layer {
+class ReLU : virtual public Layer {
     public:
         ReLU(int nodes) {
             nxtSz = nodes;

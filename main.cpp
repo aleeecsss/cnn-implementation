@@ -22,6 +22,8 @@ std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 #include "Sigmoid.h"
 #include "softMax.h"
 
+#include "denseLayer_ReLU.h"
+
 int layers;
 std::vector<std::unique_ptr<Layer>> net;
 std::vector<std::pair<std::vector<double>, std::vector<double>>> trainData, validationData, testData;
@@ -34,8 +36,8 @@ void learn(const std::vector<std::pair<std::vector<double>, std::vector<double>>
         error[0].resize(test.first.size());
 
         for (int j = 0; j < layers; ++j) {
-            a[j + 1].resize(net[j] -> nxtSz, 0);
-            error[j + 1].resize(net[j] -> nxtSz, 0);
+            a[j + 1].resize(net[j] -> get_nxtSz(), 0);
+            error[j + 1].resize(net[j] -> get_nxtSz(), 0);
         }
 
         std::copy(test.first.begin(), test.first.end(), a[0].begin());
@@ -98,7 +100,7 @@ void calcAccuracy(std::vector<std::pair<std::vector<double>, std::vector<double>
         a[0].resize(t[i].first.size());
 
         for (int j = 0; j < layers; ++j) {
-            a[j + 1].resize(net[j] -> nxtSz, 0);
+            a[j + 1].resize(net[j] -> get_nxtSz(), 0);
         }
 
         std::copy(t[i].first.begin(), t[i].first.end(), a[0].begin());
@@ -229,8 +231,7 @@ int main() {
     net.push_back(std::make_unique<convolutionLayer>(28, 28, 5, 20));
     net.push_back(std::make_unique<ReLU>(11520));
     net.push_back(std::make_unique<poolingLayer>(24, 24, 2, 20));
-    net.push_back(std::make_unique<denseLayer>(2880, 30));
-    net.push_back(std::make_unique<ReLU>(30));
+    net.push_back(std::make_unique<denseLayer_ReLU>(2880, 30));
     net.push_back(std::make_unique<denseLayer>(30, 10));
     net.push_back(std::make_unique<softMax>(10));
 
